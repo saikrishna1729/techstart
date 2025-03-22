@@ -1,0 +1,71 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import { getCollection } from "astro:content";
+
+// Get recent blog posts (replace this with your actual blog collection once set up)
+const allPosts = await getCollection("blog");
+const recentPosts = allPosts
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
+---
+
+<MainLayout title="Sai Krishna - Personal Blog">
+	<section class="py-16 md:py-24">
+		<div class="container mx-auto px-4">
+			<div class="max-w-3xl mx-auto text-center">
+				<h1 class="text-4xl md:text-5xl font-bold mb-6">
+					Welcome to My Personal Blog
+				</h1>
+				<p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+					Sharing thoughts, ideas, and knowledge about web development, design,
+					and technology.
+				</p>
+				<a
+					href="/blog"
+					class="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-md font-medium transition"
+					>Browse All Posts</a
+				>
+			</div>
+		</div>
+	</section>
+
+	<section class="container mx-auto px-4 py-16">
+		<h2 class="text-3xl font-bold mb-8">Latest Posts</h2>
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+			{
+				recentPosts.map((post) => (
+					<article class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition hover:translate-y-[-5px] hover:shadow-lg">
+						{post.data.cover && (
+							<img
+								src={post.data.cover}
+								alt={post.data.title}
+								class="w-full h-48 object-cover"
+							/>
+						)}
+						<div class="p-6">
+							<h3 class="text-xl font-bold mb-2">
+								<a href={`/blog/${post.slug}/`} class="hover:text-primary">
+									{post.data.title}
+								</a>
+							</h3>
+							<p class="text-gray-600 dark:text-gray-300 mb-4">
+								{post.data.description}
+							</p>
+							<p class="text-gray-500 text-sm">
+								{new Date(post.data.pubDate).toLocaleDateString()}
+							</p>
+						</div>
+					</article>
+				))
+			}
+		</div>
+
+		{
+			recentPosts.length === 0 && (
+				<div class="text-center py-12">
+					<p class="text-gray-500">No posts yet. Check back soon!</p>
+				</div>
+			)
+		}
+	</section>
+</MainLayout>

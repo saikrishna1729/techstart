@@ -1,0 +1,102 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+
+// Sample project data - you can replace this with real data later
+const projects = [
+	{
+		title: "Personal Blog",
+		description:
+			"A personal blog built with Astro, Tailwind CSS, and Markdown/MDX for content management.",
+		image: "https://picsum.photos/800/600?random=1",
+		tags: ["Astro", "Tailwind CSS", "Markdown"],
+		link: "https://github.com/yourusername/blog",
+		demo: "https://your-blog.com",
+	},
+	{
+		title: "E-commerce Dashboard",
+		description:
+			"Admin dashboard for managing products, orders, and customers for an online store.",
+		image: "https://picsum.photos/800/600?random=2",
+		tags: ["React", "TypeScript", "Material UI", "Node.js"],
+		link: "https://github.com/yourusername/ecommerce-dashboard",
+	},
+	{
+		title: "Weather App",
+		description:
+			"A weather forecast application using OpenWeatherMap API with geolocation features.",
+		image: "https://picsum.photos/800/600?random=3",
+		tags: ["JavaScript", "API Integration", "CSS"],
+		link: "https://github.com/yourusername/weather-app",
+		demo: "https://weather-app-demo.com",
+	},
+	{
+		title: "Task Management API",
+		description:
+			"RESTful API for task management with authentication and authorization features.",
+		image: "https://picsum.photos/800/600?random=4",
+		tags: ["Node.js", "Express", "MongoDB", "JWT"],
+		link: "https://github.com/yourusername/task-api",
+	},
+];
+---
+
+<MainLayout title="Projects | Sai Krishna">
+	<div class="container mx-auto px-4 py-12">
+		<header class="mb-12">
+			<h1 class="text-4xl font-bold mb-4">My Projects</h1>
+			<p class="text-xl text-gray-600 dark:text-gray-300">
+				Check out some of my recent work and open-source contributions
+			</p>
+		</header>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+			{
+				projects.map((project) => (
+					<article class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition hover:shadow-lg">
+						<img
+							src={project.image}
+							alt={project.title}
+							class="w-full h-56 object-cover"
+						/>
+						<div class="p-6">
+							<h3 class="text-2xl font-bold mb-2">{project.title}</h3>
+							<p class="text-gray-600 dark:text-gray-300 mb-4">
+								{project.description}
+							</p>
+
+							{project.tags && (
+								<div class="flex flex-wrap gap-2 mb-6">
+									{project.tags.map((tag) => (
+										<span class="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-full text-sm">
+											{tag}
+										</span>
+									))}
+								</div>
+							)}
+
+							<div class="flex gap-4">
+								<a
+									href={project.link}
+									target="_blank"
+									class="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 px-4 py-2 rounded font-medium text-gray-800 dark:text-gray-200 transition"
+								>
+									View Code
+								</a>
+
+								{project.demo && (
+									<a
+										href={project.demo}
+										target="_blank"
+										class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded font-medium transition"
+									>
+										Live Demo
+									</a>
+								)}
+							</div>
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</MainLayout>

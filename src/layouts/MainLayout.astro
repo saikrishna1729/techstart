@@ -1,0 +1,73 @@
+---
+import Header from "../components/Header.astro";
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const {
+	title,
+	description = "Sai Krishna's personal blog about web development, technology and more.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body
+		class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col"
+	>
+		<Header />
+
+		<main class="flex-grow">
+			<slot />
+		</main>
+
+		<footer
+			class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-12"
+		>
+			<div class="container mx-auto px-4">
+				<div class="text-center">
+					<p class="mb-4">
+						&copy; {new Date().getFullYear()} Sai Krishna. All rights reserved.
+					</p>
+					<div class="flex justify-center space-x-6">
+						<a
+							href="https://twitter.com/"
+							target="_blank"
+							class="text-gray-500 hover:text-primary transition"
+						>
+							Twitter
+						</a>
+						<a
+							href="https://github.com/"
+							target="_blank"
+							class="text-gray-500 hover:text-primary transition"
+						>
+							GitHub
+						</a>
+						<a
+							href="https://linkedin.com/"
+							target="_blank"
+							class="text-gray-500 hover:text-primary transition"
+						>
+							LinkedIn
+						</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

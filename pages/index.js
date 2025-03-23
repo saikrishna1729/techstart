@@ -16,4 +16,18 @@ export async function getStaticProps() {
 	};
 }
 
+// Add responsive meta tags
+export default function HomePage({ siteTitle }) {
+	return (
+		<>
+			<Head>
+				<title>{siteTitle}</title>
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<meta name="description" content="Welcome to TechStart.Cloud" />
+			</Head>
+			{/* ...existing code... */}
+		</>
+	);
+}
+
 // ...existing code...

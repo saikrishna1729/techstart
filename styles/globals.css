@@ -1,0 +1,72 @@
+/* Override for footer copyright text */
+footer p:nth-child(1) {
+  display: none;
+}
+
+/* Add a class we can target with JavaScript */
+.copyright-override {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Ensure the copyright text displays correctly */
+footer p:contains("Saikrishna Nagisetti")::after {
+  position: absolute;
+  right: 0;
+  left: 0;
+  visibility: visible;
+  content: "© 2024 techstart.cloud. All rights reserved.";
+}
+
+footer p:contains("Saikrishna Nagisetti") {
+  position: relative;
+  visibility: hidden;
+}
+
+/* Force footer styling */
+footer {
+  width: 100%;
+  background-color: #111827 !important; /* dark gray/black */
+  color: white !important;
+}
+
+/* Ensure the copyright text displays correctly */
+.footer-copyright {
+  color: white !important;
+  text-align: center !important;
+  margin: 0 !important;
+}
+
+/* Hide any other paragraph in the footer to prevent duplicates */
+footer p:not(.footer-copyright) {
+  display: none !important;
+}
+
+/* Very aggressive CSS to override the footer text */
+footer p:nth-child(1),
+footer p:first-child,
+footer div:first-child p,
+p[class*="copyright"],
+p[class*="footer"],
+.footer p,
+footer > div > p {
+  visibility: hidden;
+  position: relative;
+  display: block !important;
+}
+
+footer p:nth-child(1)::after,
+footer p:first-child::after,
+footer div:first-child p::after,
+p[class*="copyright"]::after,
+p[class*="footer"]::after,
+.footer p::after,
+footer > div > p::after {
+  content: "© 2024 techstart.cloud. All rights reserved.";
+  visibility: visible;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}

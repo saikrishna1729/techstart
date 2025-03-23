@@ -1,0 +1,66 @@
+---
+/**
+ * BaseLayout Component
+ *
+ * The main layout wrapper for all pages. Includes:
+ * - Common <head> elements
+ * - Header component
+ * - Main content area
+ * - Footer component
+ * - Client-side scripts for consistency
+ */
+
+import "../styles/global.css";
+import { SITE } from "../utils/site-config";
+import Footer from "./Footer.astro";
+import Header from "./Header.astro";
+
+// Get props with defaults from site config
+const {
+	title = SITE.title,
+	description = SITE.description,
+	image = "/images/default-social.jpg",
+	canonicalURL = Astro.url,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+
+		<!-- Canonical URL -->
+		<link rel="canonical" href={canonicalURL} />
+
+		<!-- Open Graph / Social Media Meta Tags -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:image" content={new URL(image, SITE.url)} />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={SITE.name} />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+
+		<title>{title}</title>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+		<!-- Footer override script to ensure consistent branding -->
+		<script is:inline src="/scripts/footer-override.js"></script>
+	</head>
+	<body
+		class="flex flex-col min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+	>
+		<Header />
+		<main class="flex-grow container mx-auto px-4 py-6">
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>

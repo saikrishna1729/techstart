@@ -7,7 +7,9 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "static-build": "node astro-static-build.js",
+    "analyze": "astro build --analyze"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.2.1",

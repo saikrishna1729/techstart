@@ -1,92 +1,50 @@
 ---
-import MainLayout from "../layouts/MainLayout.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<MainLayout title="About Me | Sai Krishna">
-	<div class="container mx-auto px-4 py-12">
-		<div class="max-w-3xl mx-auto">
-			<h1 class="text-4xl font-bold mb-8">About Me</h1>
+<Layout title="About Me">
+	<div class="max-w-3xl mx-auto">
+		<h1 class="text-4xl font-bold mb-6">About Me</h1>
 
-			<div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 mb-12">
-				<div class="flex flex-col md:flex-row gap-8 items-center mb-8">
-					<img
-						src="https://via.placeholder.com/300"
-						alt="Sai Krishna"
-						class="w-40 h-40 rounded-full object-cover"
-					/>
-					<div>
-						<h2 class="text-2xl font-bold mb-2">Sai Krishna</h2>
-						<p class="text-gray-600 dark:text-gray-300 mb-4">
-							Web Developer & Technology Enthusiast
-						</p>
-						<div class="flex space-x-4">
-							<a
-								href="https://github.com/"
-								target="_blank"
-								class="text-gray-500 hover:text-primary"
-							>
-								GitHub
-							</a>
-							<a
-								href="https://linkedin.com/"
-								target="_blank"
-								class="text-gray-500 hover:text-primary"
-							>
-								LinkedIn
-							</a>
-							<a
-								href="https://twitter.com/"
-								target="_blank"
-								class="text-gray-500 hover:text-primary"
-							>
-								Twitter
-							</a>
-						</div>
-					</div>
-				</div>
+		<div class="prose prose-lg dark:prose-invert max-w-none">
+			<p>
+				Hello, I'm Saikrishna Nagisetti, a passionate technologist and the
+				creator of TechStart.Cloud.
+			</p>
 
-				<div class="prose dark:prose-invert max-w-none">
-					<p>
-						Hello! I'm Sai Krishna, a passionate web developer with expertise in
-						modern frontend and backend technologies. I love building
-						user-friendly web applications and sharing my knowledge through
-						writing and open source contributions.
-					</p>
+			<p>
+				I have extensive experience in web development, cloud computing, and
+				software engineering. My goal is to share knowledge and insights through
+				this blog to help others in their tech journey.
+			</p>
 
-					<h3>My Background</h3>
-					<p>
-						I have several years of experience in web development, specializing
-						in JavaScript frameworks like React, Next.js, and Vue.js. I'm also
-						familiar with backend technologies including Node.js, Express, and
-						various databases.
-					</p>
+			<h2>Background</h2>
+			<p>
+				With over [X] years in the industry, I've worked with various
+				technologies and frameworks. My expertise includes:
+			</p>
+			<ul>
+				<li>Full-stack web development</li>
+				<li>Cloud architecture and deployment</li>
+				<li>DevOps practices and tools</li>
+				<li>Performance optimization</li>
+				<li>Technical writing and documentation</li>
+			</ul>
 
-					<h3>Skills</h3>
-					<ul>
-						<li>JavaScript/TypeScript</li>
-						<li>React.js & Next.js</li>
-						<li>HTML5 & CSS3</li>
-						<li>Node.js & Express</li>
-						<li>Database Design & Management</li>
-						<li>RESTful API Development</li>
-					</ul>
+			<h2>Why TechStart.Cloud?</h2>
+			<p>
+				I created this blog to document my learning journey and share valuable
+				insights with the community. Here, you'll find tutorials, guides, best
+				practices, and thought pieces on various tech topics.
+			</p>
 
-					<h3>Interests</h3>
-					<p>
-						Beyond coding, I enjoy reading technical books, exploring new
-						technologies, contributing to open source projects, and sharing my
-						knowledge through blog posts and tutorials.
-					</p>
-
-					<h3>Contact</h3>
-					<p>
-						Feel free to reach out to me if you have any questions or just want
-						to connect! You can contact me at <a
-							href="mailto:your-email@example.com">your-email@example.com</a
-						>.
-					</p>
-				</div>
-			</div>
+			<h2>Connect With Me</h2>
+			<p>
+				I'm always open to interesting conversations and collaboration
+				opportunities. Feel free to reach out through any of the social
+				platforms linked in the footer or via email at
+				<a href="mailto:contact@techstart.cloud">contact@techstart.cloud</a>.
+			</p>
 		</div>
 	</div>
-</MainLayout>
+</Layout>

@@ -20,6 +20,7 @@ const sortedPosts = allPosts.sort(
 
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 			{
+				// Map through the sorted posts and display each post
 				sortedPosts.map((post) => (
 					<article class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition hover:translate-y-[-5px] hover:shadow-lg">
 						{post.data.cover && (
@@ -27,6 +28,8 @@ const sortedPosts = allPosts.sort(
 								src={post.data.cover}
 								alt={post.data.title}
 								class="w-full h-48 object-cover"
+								loading="lazy"
+								sizes="(max-width: 600px) 100vw, 50vw"
 							/>
 						)}
 						<div class="p-6">
@@ -59,6 +62,7 @@ const sortedPosts = allPosts.sort(
 		</div>
 
 		{
+			// Display a message if there are no posts available
 			sortedPosts.length === 0 && (
 				<div class="text-center py-12">
 					<p class="text-gray-500">No posts available yet. Check back soon!</p>

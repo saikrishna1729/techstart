@@ -1,20 +1,35 @@
 ---
+/**
+ * Header Component
+ *
+ * Displays the site header with logo/title and main navigation.
+ */
+import { SITE, NAVIGATION } from "../utils/site-config";
 
+// Site branding
+const siteName = SITE.name;
 ---
 
-<header class="bg-white dark:bg-gray-900 shadow-sm sticky top-0 z-10">
-	<div class="container mx-auto px-4 py-4 flex justify-between items-center">
-		<a href="/" class="text-2xl font-bold text-primary">Sai Krishna</a>
-		<nav>
-			<ul class="flex space-x-6">
-				<li><a href="/" class="hover:text-primary transition">Home</a></li>
-				<li><a href="/blog" class="hover:text-primary transition">Blog</a></li>
-				<li>
-					<a href="/projects" class="hover:text-primary transition">Projects</a>
-				</li>
-				<li>
-					<a href="/about" class="hover:text-primary transition">About</a>
-				</li>
+<header class="bg-gray-900 text-white p-4">
+	<div class="container mx-auto flex justify-between items-center">
+		<!-- Site logo/name -->
+		<a href="/" class="text-xl font-bold">{siteName}</a>
+
+		<!-- Main navigation -->
+		<nav aria-label="Main navigation">
+			<ul class="flex space-x-4">
+				{
+					NAVIGATION.map((item) => (
+						<li>
+							<a
+								href={item.path}
+								class="text-gray-400 hover:text-white transition-colors"
+							>
+								{item.name}
+							</a>
+						</li>
+					))
+				}
 			</ul>
 		</nav>
 	</div>

@@ -1,0 +1,45 @@
+/**
+ * Footer Override Styles
+ * 
+ * These styles ensure the footer displays consistent branding
+ * by hiding potential incorrect text and applying the correct text.
+ */
+
+/* Ensure footer has the correct styling */
+footer {
+  width: 100%;
+  background-color: #111827 !important;
+  color: white !important;
+}
+
+/* Style for our explicitly marked copyright text */
+.footer-copyright {
+  color: white !important;
+  text-align: center !important;
+  margin: 0 !important;
+  font-size: 0.875rem !important;
+}
+
+/* CSS-based text replacement for any element that might contain copyright text */
+[class*="copyright"],
+[class*="footer"] p,
+footer p:not(.footer-copyright) {
+  visibility: hidden;
+  position: relative;
+  display: block !important;
+  height: auto !important;
+  min-height: 1rem !important;
+}
+
+/* Generate the replacement text */
+[class*="copyright"]:after,
+[class*="footer"] p:after,
+footer p:not(.footer-copyright):after {
+  content: "© 2024 techstart.cloud. All rights reserved.";
+  visibility: visible;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}

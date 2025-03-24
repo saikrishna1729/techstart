@@ -1,47 +1,13 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { getCollection } from "astro:content";
 
-// Array of blog posts
-const allPosts = [
-	{
-		url: "/blog/hello-world",
-		frontmatter: {
-			title: "Getting Started with Astro",
-			description: "Learn how to build lightning-fast websites with Astro",
-			pubDate: new Date("2023-04-15"),
-			cover: "https://picsum.photos/800/400",
-		},
-	},
-	{
-		url: "#",
-		frontmatter: {
-			title: "CSS Tips and Tricks",
-			description: "Enhance your styling skills with these CSS techniques",
-			pubDate: new Date("2023-04-10"),
-			cover: "https://picsum.photos/800/401",
-		},
-	},
-	{
-		url: "#",
-		frontmatter: {
-			title: "JavaScript Best Practices",
-			description: "Write cleaner, more maintainable JavaScript code",
-			pubDate: new Date("2023-04-05"),
-			cover: "https://picsum.photos/800/402",
-		},
-	},
-	{
-		url: "#",
-		frontmatter: {
-			title: "Understanding React Hooks",
-			description:
-				"A deep dive into React Hooks and how to use them effectively",
-			pubDate: new Date("2023-04-01"),
-			cover: "https://picsum.photos/800/403",
-		},
-	},
-];
+// Fetch all blog posts and sort them by publication date (newest first)
+const allPosts = await getCollection("blog");
+const latestPosts = allPosts
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 4); // Limit to the latest 4 posts
 ---
 
 <html lang="en">
@@ -153,12 +119,12 @@ const allPosts = [
 				<h2>Latest Posts</h2>
 				<div class="posts-grid">
 					{
-						// Map through allPosts array and render each post
-						allPosts.map((post) => (
+						// Map through latestPosts array and render each post
+						latestPosts.map((post) => (
 							<article class="post-card">
 								<img
-									src={post.frontmatter.cover}
-									alt={post.frontmatter.title}
+									src={post.data.cover}
+									alt={post.data.title}
 									class="post-image"
 									loading="lazy"
 									sizes="(max-width: 600px) 100vw, 50vw"
@@ -166,15 +132,15 @@ const allPosts = [
 								<div class="post-content">
 									<h3 class="post-title">
 										<a
-											href={post.url}
+											href={`/blog/${post.slug}/`}
 											style="text-decoration: none; color: inherit;"
 										>
-											{post.frontmatter.title}
+											{post.data.title}
 										</a>
 									</h3>
-									<p class="post-description">{post.frontmatter.description}</p>
+									<p class="post-description">{post.data.description}</p>
 									<p class="post-date">
-										{post.frontmatter.pubDate.toDateString()}
+										{new Date(post.data.pubDate).toDateString()}
 									</p>
 								</div>
 							</article>

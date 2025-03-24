@@ -3,7 +3,7 @@ name: Deploy to AWS S3 and Amplify
 on:
   push:
     branches:
-      - master  # or main, depending on your default branch
+      - main  # or master, depending on your default branch
 
 jobs:
   deploy:
@@ -35,9 +35,10 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
+          AMPLIFY_BRANCH: ${{ secrets.AMPLIFY_BRANCH }}
           AMPLIFY_CLI_AUTH_METHOD: accessKey
         run: |
-          amplify pull --appId $AMPLIFY_APP_ID --envName $AMPLIFY_BRANCH --region $AWS_REGION
+          amplify pull --appId $AMPLIFY_APP_ID --envName $AMPLIFY_BRANCH --region $AWS_REGION --yes --amplify "{ \"envName\":\"$AMPLIFY_BRANCH\" }" --frontend "{ \"frontend\":\"javascript\", \"framework\":\"none\" }" --providers "{ \"awscloudformation\": { \"configLevel\":\"project\", \"useProfile\":false, \"accessKeyId\":\"$AWS_ACCESS_KEY_ID\", \"secretAccessKey\":\"$AWS_SECRET_ACCESS_KEY\", \"region\":\"$AWS_REGION\" } }"
 
       - name: Build site
         run: npm run build

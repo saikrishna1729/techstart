@@ -3,7 +3,10 @@ node_modules/
 
 # Build output
 dist/
-
+!dist/about/*
+!dist/blog/*
+!dist/index.html
+!dist/404.html    
 # Astro cache
 .astro/
 

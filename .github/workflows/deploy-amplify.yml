@@ -28,6 +28,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
+          AMPLIFY_CLI_AUTH_METHOD: accessKey
         run: |
           amplify pull --appId $AMPLIFY_APP_ID --envName $AMPLIFY_BRANCH --region $AWS_REGION
 

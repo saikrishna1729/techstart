@@ -8,4 +8,4 @@ tags: ["astro", "web development", "tutorial"]
 
 # Hybrid Cloud Migration ( Discovery )
 
-In this blog post i would like to talk about xxx
+This blog is mainly about the cloud migration

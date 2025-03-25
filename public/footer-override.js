@@ -1,62 +1,36 @@
-// This script uses a MutationObserver to watch for any changes to the DOM
-// and overrides the footer text whenever it changes
-
 (function () {
-	// The text we want to show
-	const correctCopyrightText = `© ${new Date().getFullYear()} techstart.cloud. All rights reserved.`;
+	// The correct branding
+	const siteName = "techstart.cloud";
+	const currentYear = new Date().getFullYear();
+	const correctCopyrightText = `© ${currentYear} ${siteName}. All rights reserved.`;
 
-	// The text we want to replace (case insensitive)
-	const textToReplace = /saikrishna nagisetti/i;
+	// Text patterns to identify and replace
+	const textPatterns = [/saikrishna nagisetti/i, /© \d{4}.*rights reserved/i];
 
-	// Function to update the footer text
+	// Updates the footer text
 	function updateFooterText() {
-		// Try to find paragraphs in the footer
-		const footerElements = document.querySelectorAll(
-			"footer p, footer div, .footer p, .footer div"
-		);
+		// Find footer paragraphs
+		const footerElements = document.querySelectorAll("footer p");
 
 		footerElements.forEach((element) => {
-			// Check if this element or its children contain the text we want to replace
-			if (element.innerHTML.match(textToReplace)) {
-				console.log("Found footer text to replace:", element.innerHTML);
+			if (!element.textContent) return;
 
-				// Replace the text
+			// Check if this element matches our patterns
+			const needsReplacement = textPatterns.some((pattern) =>
+				pattern.test(element.textContent)
+			);
+
+			if (needsReplacement && !element.hasAttribute("data-override-applied")) {
+				// Mark as processed to avoid repeated updates
+				element.setAttribute("data-override-applied", "true");
 				element.innerHTML = correctCopyrightText;
 			}
 		});
 	}
 
-	// Run once when the script loads
-	if (
-		document.readyState === "complete" ||
-		document.readyState === "interactive"
-	) {
-		setTimeout(updateFooterText, 100);
-	} else {
-		document.addEventListener("DOMContentLoaded", function () {
-			setTimeout(updateFooterText, 100);
-		});
-	}
+	// Run when DOM is ready
+	document.addEventListener("DOMContentLoaded", updateFooterText);
 
-	// Also run on page load
-	window.addEventListener("load", function () {
-		setTimeout(updateFooterText, 100);
-	});
-
-	// Set up a mutation observer to watch for changes to the DOM
-	const observer = new MutationObserver(function (mutations) {
-		// When mutations occur, check if we need to update the footer
-		setTimeout(updateFooterText, 10);
-	});
-
-	// Start observing the document with the configured parameters
-	observer.observe(document.documentElement, {
-		childList: true, // observe direct children
-		subtree: true, // and lower descendants too
-		characterData: true, // watch for text changes
-		attributes: false, // don't care about attribute changes
-	});
-
-	// Also run repeatedly to make sure it sticks
-	setInterval(updateFooterText, 1000);
+	// Also run after full load
+	window.addEventListener("load", updateFooterText);
 })();

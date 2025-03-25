@@ -37,7 +37,7 @@ jobs:
           AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
           AMPLIFY_CLI_AUTH_METHOD: accessKey
         run: |
-          amplify pull --appId $AMPLIFY_APP_ID --envName $AMPLIFY_BRANCH --region $AWS_REGION --yes
+          amplify pull --appId $AMPLIFY_APP_ID --envName true --region $AWS_REGION --yes
 
       - name: Build site
         run: npm run build
@@ -60,4 +60,4 @@ jobs:
           AMPLIFY_BRANCH: ${{ secrets.AMPLIFY_BRANCH }}
           AMPLIFY_CLI_AUTH_METHOD: accessKey
         run: |
-          amplify publish --appId $AMPLIFY_APP_ID --branchName $AMPLIFY_BRANCH --region $AWS_REGION --yes
+          amplify publish --appId $AMPLIFY_APP_ID --branchName true --region $AWS_REGION --yes

@@ -45,6 +45,6 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
           AMPLIFY_BRANCH: ${{ secrets.AMPLIFY_BRANCH }}
-          SOURCE_URL: s3://$S3_BUCKET/prefix
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
         run: |
-          aws amplify start-deployment --app-id $AMPLIFY_APP_ID --branch-name $AMPLIFY_BRANCH --source-url $SOURCE_URL --source-url-type BUCKET_PREFIX
+          aws amplify start-deployment --app-id $AMPLIFY_APP_ID --branch-name $AMPLIFY_BRANCH --source-url "s3://$S3_BUCKET/" --source-url-type BUCKET_PREFIX

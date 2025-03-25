@@ -19,8 +19,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Amplify CLI
-        run: npm install -g @aws-amplify/cli
+      - name: Install AWS CLI
+        run: |
+          curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+          sudo installer -pkg AWSCLIV2.pkg -target /
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -28,16 +30,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-
-      - name: Pull Amplify project
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
-          AMPLIFY_CLI_AUTH_METHOD: accessKey
-        run: |
-          amplify pull --appId $AMPLIFY_APP_ID --envName true --region $AWS_REGION --yes
 
       - name: Build site
         run: npm run build
@@ -58,6 +50,6 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
           AMPLIFY_BRANCH: ${{ secrets.AMPLIFY_BRANCH }}
-          AMPLIFY_CLI_AUTH_METHOD: accessKey
+          SOURCE_URL: s3://$S3_BUCKET/prefix
         run: |
-          amplify publish --appId $AMPLIFY_APP_ID --branchName true --region $AWS_REGION --yes
+          aws amplify start-deployment --app-id $AMPLIFY_APP_ID --branch-name $AMPLIFY_BRANCH --source-url $SOURCE_URL --source-url-type BUCKET_PREFIX

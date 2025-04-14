@@ -6,34 +6,37 @@ const { post } = Astro.props;
 const { title, description, pubDate, heroImage, tags } = post.data;
 ---
 
-<article class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-	{
-		heroImage && (
-			<a href={`/blog/${post.slug}/`}>
+<article
+	class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-transform transform hover:scale-102 hover:shadow-lg duration-300 ease-in-out"
+>
+	<a href={`/blog/${post.slug}/`} class="block">
+		{
+			heroImage && (
 				<img
 					src={heroImage}
 					alt={title}
-					class="w-full h-48 object-cover hover:opacity-90 transition"
+					class="w-full h-56 object-cover transition-opacity duration-300 ease-in-out hover:opacity-90"
 				/>
-			</a>
-		)
-	}
-	<div class="p-6">
-		<h2 class="text-2xl font-bold mb-2">
-			<a href={`/blog/${post.slug}/`} class="hover:text-primary transition"
-				>{title}</a
+			)
+		}
+		<div class="p-6">
+			<h2
+				class="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-3 transition-colors duration-300 ease-in-out hover:text-primary"
 			>
-		</h2>
-		<div class="flex items-center text-gray-600 dark:text-gray-400 mb-4">
-			<FormattedDate date={pubDate} />
+				{title}
+			</h2>
+			<div class="flex items-center text-gray-600 dark:text-gray-400 mb-3 text-sm">
+				<FormattedDate date={pubDate} />
+			</div>
+			{tags && <TagList tags={tags} />}
+			<p class="text-gray-700 dark:text-gray-300 mt-3 text-sm md:text-base line-clamp-3">
+				{description}
+			</p>
+			<span
+				class="inline-block mt-4 text-primary hover:text-secondary transition duration-300 ease-in-out font-medium text-sm"
+			>
+				Read more →
+			</span>
 		</div>
-		{tags && <TagList tags={tags} />}
-		<p class="text-gray-700 dark:text-gray-300 mt-4">{description}</p>
-		<a
-			href={`/blog/${post.slug}/`}
-			class="inline-block mt-4 text-primary hover:text-secondary transition"
-		>
-			Read more →
-		</a>
-	</div>
+	</a>
 </article>
